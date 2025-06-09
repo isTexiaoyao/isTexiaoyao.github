@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>永远爱陆宇萌</title>
+    <style>
+        /* 添加图片动画样式 */
+        .image-star {
+            position: absolute;
+            animation: fadeInOut 5s ease-in-out infinite;
+            pointer-events: none;
+            max-width: 160px; /* 基础宽度 */
+            aspect-ratio: 9/16; /* 保持图片比例 */
+            object-fit: cover;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.9); }
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .image-star {
+                max-width: 80px; /* 移动端基础宽度 */
+                max-height: 80px;
+            }
+            
+            .content h1 { font-size: 2.5em; }
+            .content p { font-size: 1.2em; }
+            .timer { top: 5px; left: 5px; padding: 5px; }
+            .jump-button { top: 5px; right: 5px; padding: 5px 10px; font-size: 0.8em; }
+            .music-player { bottom: 5px; right: 5px; width: 90%; max-width: 280px; }
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #000;
+            overflow: hidden;
+            position: relative;
+            touch-action: manipulation;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 1.5s infinite;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            color: #fff;
+            text-align: center;
+            font-family: '宋体', cursive;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin: 0 15px;
+            text-shadow: 0 0 10px #ff69b4;
+            animation: fadeIn 2s ease-in;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin: 15px 0;
+            padding: 0 15px;
+        }
+
+        .timer {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            width: 80%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+
+        .timer span {
+            display: block;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .jump-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 8px 12px;
+            color: #fff;
+            background: rgba(100, 100, 100, 0.7);
+            border-radius: 20px;
+            cursor: pointer;
+            z-index: 2;
+            font-family: Arial, sans-serif;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .music-player {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (min-width: 768px) {
+            .image-star {
+                max-width: 150px; /* 桌面端基础宽度 */
+                max-height: 150px;
+            }
+            
+            .jump-button { top: 20px; right: 20px; padding: 10px 15px; font-size: 1em; }
+            .music-player { bottom: 20px; right: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // 图片闪烁功能
+        const imagePaths = [
+            'images/1.png',
+            'images/2.png',
+            'images/3.png',
+            'images/7.png',
+            'images/8.png',
+            'images/9.png',
+            'images/10.png',
+            'images/11.png',
+            'images/12.png',
+            'images/13.png',
+            'images/14.png',
+            'images/15.png',
+            'images/16.png',
+            'images/17.png',
+            'images/18.png',
+            'images/19.png',
+            'images/20.png',
+            'images/21.png',
+            'images/22.png',
+            'images/23.png',
+            'images/24.png',
+            'images/25.png',
+            'images/26.png',
+            'images/27.png',
+            'images/28.png',
+            'images/29.png',
+            'images/30.png',
+            'images/31.png',
+            'images/32.png',
+            'images/33.png',
+            'images/34.png',
+            'images/35.png',
+            'images/36.png',
+            'images/37.png',
+            'images/38.png',
+            'images/39.png',
+            'images/40.png',
+            'images/41.png',
+            'images/42.png',
+            'images/43.png',
+            'images/44.png',
+            'images/45.png',
+            'images/46.png',
+            'images/47.png',
+            'images/48.png',
+            'images/49.png',
+            'images/50.png',
+            'images/51.png',
+            'images/52.png',
+            'images/53.png',
+            'images/54.png',
+            'images/55.png',
+            'images/56.png',
+            'images/57.png',
+            'images/58.png',
+            'images/59.png',
+            'images/60.png',
+            'images/61.png',
+            'images/62.png',
+            'images/63.png',
+            'images/64.png',
+            'images/65.png',
+            'images/66.png',
+            'images/67.png',
+            'images/68.png',
+            'images/69.png',
+            'images/70.png',
+            'images/71.png',
+            'images/72.png',
+            'images/73.png',
+            'images/74.png',
+            'images/75.png',
+            'images/76.png',
+            'images/77.png',
+            'images/78.png',
+            'images/79.png',
+            'images/80.png',
+            'images/81.png',
+            'images/82.png',
+            'images/83.png',
+            'images/84.png',
+            'images/85.png',
+            'images/86.png',
+            'images/87.png',
+            'images/88.png',
+            'images/89.png',
+            'images/90.png',
+            'images/91.png',
+            'images/92.png',
+            'images/93.png',
+            'images/94.png',
+            'images/95.png',
+            'images/96.png',
+            'images/97.png',
+            'images/98.png',
+            'images/99.png',
+            'images/100.png',
+            'images/101.png',
+            'images/102.png',
+            'images/103.png',
+            'images/104.png',
+            'images/105.png',
+            'images/106.png',
+            'images/107.png'
+        ];
+        function createImageStars() {
+            const starsContainer = document.querySelector('.stars');
+            const img = document.createElement('img');
+            
+            img.className = 'image-star';
+            img.src = imagePaths[Math.floor(Math.random() * imagePaths.length)];
+            
+            // 动态位置和尺寸（保持16:9比例）
+            const baseWidth = 100 + Math.random() * 100;
+            img.style.width = baseWidth + 'px';
+            img.style.height = (baseWidth * 16/9) + 'px';
+            
+            img.style.left = Math.random() * 95 + '%';
+            img.style.top = Math.random() * 95 + '%';
+            
+            starsContainer.appendChild(img);
+            
+            setTimeout(() => img.remove(), 5000);
+        }
+        // 初始化图片动画
+        setInterval(createImageStars, 2000);
+        createImageStars(); // 立即创建第一个
+    </script>
+
+    <div class="stars"></div>
+    
+    <div class="timer" id="loveTimer">
+        <span id="timeCounter"></span>
+    </div>
+
+    <div class="content">
+        <h1>陆宇萌</h1>
+        <p>你是我宇宙中最亮的星<br>
+        愿与你共度这浩瀚星河<br>
+        爱你，直到最后一颗星辰熄灭</p>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="周杰伦 - 晴天.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 右下角音乐播放器 -->
+    <div class="music-player">
+        <audio id="bgMusicPlayer" controls loop>
+            <source src="周杰伦 - 晴天.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- 右上角跳转按钮 -->
+    <a href="https://isTexiaoyao.github.io" class="jump-button" target="_blank">爱情痕迹❀</a>
+
+    <script>
+        // 防止移动端双击缩放
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (event) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) event.preventDefault();
+            lastTouchEnd = now;
+        });
+
+        // 创建星空
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.cssText = `
+                    width: ${Math.random() * 3}px;
+                    height: ${Math.random() * 3}px;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation-delay: ${Math.random() * 1.5}s;
+                `;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // 计时器
+        function updateTimer() {
+            const startDate = new Date(2023, 11, 1);
+            const diff = Date.now() - startDate;
+            document.getElementById('timeCounter').innerHTML = 
+            `我们在一起：${Math.floor(diff/864e5)}天 ${new Date(diff).toISOString().substr(11, 8).replace(/:/g, '时', '分')}秒了`;
+        }
+
+        // 初始化
+        createStars();
+        setInterval(updateTimer, 1000);
+        updateTimer();
+        
+        // 自动播放音乐（处理移动端浏览器限制）
+        document.addEventListener('touchstart', function playMusic() {
+            const audio = document.getElementById('bgMusicPlayer');
+            if (audio.paused) {
+                audio.play().catch(e => console.log('自动播放被浏览器阻止，请手动点击播放按钮:', e));
+            }
+            document.removeEventListener('touchstart', playMusic);
+        }, {once: true});
+    </script>
+</body>
+</html>
+
